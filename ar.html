@@ -95,139 +95,77 @@
               raycaster="far: 10000; objects: .clickable">
     </a-camera>
 
-    <!-- AR Content — anchored to target index 0 (portrait brochure ~0.71 aspect ratio) -->
-    <a-entity mindar-image-target="targetIndex: 0" id="target-entity">
-
-      <!-- Semi-transparent overlay on brochure (portrait: width=1, height=1.414) -->
-      <a-plane
-        id="ar-overlay"
-        position="0 0 0.001"
-        width="1"
-        height="1.414"
-        material="color: #e74c3c; opacity: 0.08; transparent: true; side: double"
-      ></a-plane>
-
-      <!-- Glowing border frame (portrait) -->
-      <a-entity id="ar-frame">
-        <a-plane position="0 0.707 0.002" width="1.02" height="0.008"
-                 material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5">
-        </a-plane>
-        <a-plane position="0 -0.707 0.002" width="1.02" height="0.008"
-                 material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5">
-        </a-plane>
-        <a-plane position="-0.506 0 0.002" width="0.008" height="1.42"
-                 material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4">
-        </a-plane>
-        <a-plane position="0.506 0 0.002" width="0.008" height="1.42"
-                 material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4">
-        </a-plane>
+    <!-- PAGE 0: COVER (Drone/Orbital Theme) -->
+    <a-entity mindar-image-target="targetIndex: 0" id="target-entity-0">
+      <a-plane id="ar-overlay-0" position="0 0 0.001" width="1" height="1.414" material="color: #e74c3c; opacity: 0.08; transparent: true; side: double"></a-plane>
+      <a-entity id="ar-frame-0">
+        <a-plane position="0 0.707 0.002" width="1.02" height="0.008" material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5"></a-plane>
+        <a-plane position="0 -0.707 0.002" width="1.02" height="0.008" material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5"></a-plane>
+        <a-plane position="-0.506 0 0.002" width="0.008" height="1.42" material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4"></a-plane>
+        <a-plane position="0.506 0 0.002" width="0.008" height="1.42" material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4"></a-plane>
       </a-entity>
+      <a-sphere class="clickable" position="0 0.15 0.2" radius="0.07" material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 0.6; metalness: 0.8; roughness: 0.2; transparent: true; opacity: 0.9" animation="property: position; to: 0 0.25 0.2; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate" animation__rotate="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true" animation__pulse="property: scale; to: 1.15 1.15 1.15; dur: 1500; easing: easeInOutSine; loop: true; dir: alternate" ar-click-handler="action: info"></a-sphere>
+      <a-torus class="clickable" position="0 0.15 0.2" radius="0.12" radius-tubular="0.004" segments-radial="32" segments-tubular="48" material="color: #fff; emissive: #fff; emissiveIntensity: 0.4; transparent: true; opacity: 0.6" rotation="75 0 0" animation="property: rotation; to: 75 360 0; dur: 3000; easing: linear; loop: true" ar-click-handler="action: animate"></a-torus>
+      <a-sphere class="clickable" position="-0.35 0.45 0.1" radius="0.03" material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.8; transparent: true; opacity: 0.8" animation="property: position; to: -0.35 0.5 0.1; dur: 2500; easing: easeInOutSine; loop: true; dir: alternate" ar-click-handler="action: link; url: https://www.bookthatstudio.com"></a-sphere>
+      <a-entity position="0 0.55 0.1" text="value: BookThatStudio; align: center; color: #ffffff; width: 1; font: roboto"></a-entity>
+      <a-entity position="0 -0.55 0.1" text="value: Page 1: Cover; align: center; color: #e8e8f0; width: 0.6; font: roboto"></a-entity>
+    </a-entity>
 
-      <!-- Central floating camera/drone icon sphere -->
-      <a-sphere
-        id="ar-orb"
-        class="clickable"
-        position="0 0.15 0.2"
-        radius="0.07"
-        material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 0.6; metalness: 0.8; roughness: 0.2; transparent: true; opacity: 0.9"
-        animation="property: position; to: 0 0.25 0.2; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate"
-        animation__rotate="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true"
-        animation__pulse="property: scale; to: 1.15 1.15 1.15; dur: 1500; easing: easeInOutSine; loop: true; dir: alternate"
-        ar-click-handler="action: info"
-      ></a-sphere>
+    <!-- PAGE 1: SERVICES (Services Hub Theme) -->
+    <a-entity mindar-image-target="targetIndex: 1" id="target-entity-1">
+      <a-plane position="0 0 0.001" width="1" height="1.414" material="color: #3498db; opacity: 0.08; transparent: true; side: double"></a-plane>
+      <a-entity id="ar-frame-1">
+        <a-plane position="0 0.707 0.002" width="1.02" height="0.008" material="color: #3498db; opacity: 0.8; transparent: true; emissive: #3498db; emissiveIntensity: 0.5"></a-plane>
+        <a-plane position="0 -0.707 0.002" width="1.02" height="0.008" material="color: #3498db; opacity: 0.8; transparent: true; emissive: #3498db; emissiveIntensity: 0.5"></a-plane>
+      </a-entity>
+      <!-- Drone Icon -->
+      <a-entity position="-0.25 0.3 0.15" animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+        <a-box width="0.1" height="0.02" depth="0.1" material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.5"></a-box>
+        <a-sphere position="0 0.02 0" radius="0.03" material="color: #ffffff"></a-sphere>
+      </a-entity>
+      <a-entity position="-0.25 0.15 0.15" text="value: Drone Shoots; align: center; width: 0.6; color: #fff"></a-entity>
+      <!-- Camera Icon -->
+      <a-entity position="0.25 0.3 0.15" animation="property: rotation; to: 0 -360 0; dur: 6000; easing: linear; loop: true">
+        <a-box width="0.1" height="0.08" depth="0.05" material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.5"></a-box>
+        <a-cylinder position="0 0 0.03" radius="0.03" height="0.02" rotation="90 0 0" material="color: #fff"></a-cylinder>
+      </a-entity>
+      <a-entity position="0.25 0.15 0.15" text="value: Events; align: center; width: 0.6; color: #fff"></a-entity>
+      <!-- Middle Label -->
+      <a-entity position="0 0 0.2" text="value: OUR SERVICES; align: center; width: 1.5; color: #fff; font: roboto" animation="property: scale; to: 1.1 1.1 1.1; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate"></a-entity>
+      <a-entity position="0 -0.55 0.1" text="value: Page 2: Services; align: center; color: #e8e8f0; width: 0.6; font: roboto"></a-entity>
+    </a-entity>
 
-      <!-- Orbiting ring - drone propeller effect -->
-      <a-torus
-        id="ar-ring"
-        class="clickable"
-        position="0 0.15 0.2"
-        radius="0.12"
-        radius-tubular="0.004"
-        segments-radial="32"
-        segments-tubular="48"
-        material="color: #fff; emissive: #fff; emissiveIntensity: 0.4; transparent: true; opacity: 0.6"
-        rotation="75 0 0"
-        animation="property: rotation; to: 75 360 0; dur: 3000; easing: linear; loop: true"
-        ar-click-handler="action: animate"
-      ></a-torus>
+    <!-- PAGE 2: PROPERTY (Real Estate theme) -->
+    <a-entity mindar-image-target="targetIndex: 2" id="target-entity-2">
+      <a-plane position="0 0 0.001" width="1" height="1.414" material="color: #2ecc71; opacity: 0.08; transparent: true; side: double"></a-plane>
+      <!-- Floating House Wireframe -->
+      <a-entity position="0 0.1 0.2" rotation="0 45 0" animation="property: rotation; to: 0 405 0; dur: 8000; easing: linear; loop: true">
+        <a-box width="0.2" height="0.2" depth="0.2" material="wireframe: true; color: #2ecc71; emissive: #2ecc71; emissiveIntensity: 1"></a-box>
+        <a-cone position="0 0.15 0" radius-bottom="0.15" height="0.1" material="color: #2ecc71; opacity: 0.5; transparent: true"></a-cone>
+      </a-entity>
+      <a-entity position="0 0.45 0.15" text="value: PREMIUM REAL ESTATE; align: center; width: 1.2; color: #ffffff"></a-entity>
+      <a-entity position="0 0.35 0.15" text="value: Photography & Video; align: center; width: 0.8; color: #2ecc71"></a-entity>
+      <!-- Feature Tags -->
+      <a-entity position="-0.3 -0.1 0.1" text="value: 4K Video; align: center; width: 0.6; color: #fff"></a-entity>
+      <a-entity position="0.3 -0.1 0.1" text="value: HDR Photos; align: center; width: 0.6; color: #fff"></a-entity>
+      <a-entity position="0 -0.55 0.1" text="value: Page 3: Property; align: center; color: #e8e8f0; width: 0.6; font: roboto"></a-entity>
+    </a-entity>
 
-      <!-- Second ring -->
-      <a-torus
-        id="ar-ring-2"
-        position="0 0.15 0.2"
-        radius="0.15"
-        radius-tubular="0.002"
-        segments-radial="32"
-        segments-tubular="48"
-        material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 0.3; transparent: true; opacity: 0.4"
-        rotation="30 90 0"
-        animation="property: rotation; to: 30 450 0; dur: 8000; easing: linear; loop: true"
-      ></a-torus>
-
-      <!-- Service point: Website -->
-      <a-sphere
-        class="clickable"
-        position="-0.35 0.45 0.1"
-        radius="0.03"
-        material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
-        animation="property: position; to: -0.35 0.5 0.1; dur: 2500; easing: easeInOutSine; loop: true; dir: alternate"
-        ar-click-handler="action: link; url: https://www.bookthatstudio.com"
-      ></a-sphere>
-
-      <!-- Service point: Call -->
-      <a-sphere
-        class="clickable"
-        position="0.35 0.4 0.08"
-        radius="0.025"
-        material="color: #2ecc71; emissive: #2ecc71; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
-        animation="property: position; to: 0.35 0.47 0.08; dur: 3000; easing: easeInOutSine; loop: true; dir: alternate"
-        ar-click-handler="action: link; url: tel:+919220965377"
-      ></a-sphere>
-
-      <!-- Service point: Email -->
-      <a-sphere
-        class="clickable"
-        position="0.3 -0.35 0.07"
-        radius="0.02"
-        material="color: #f39c12; emissive: #f39c12; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
-        animation="property: position; to: 0.3 -0.3 0.07; dur: 2800; easing: easeInOutSine; loop: true; dir: alternate"
-        ar-click-handler="action: link; url: mailto:hi@bookthatstudio.com"
-      ></a-sphere>
-
-      <!-- Main title text -->
-      <a-entity
-        id="ar-label-title"
-        position="0 0.55 0.1"
-        text="value: BookThatStudio; align: center; color: #ffffff; width: 1; font: roboto"
-        animation="property: components.text.material.uniforms.opacity.value; from: 0.6; to: 1; dur: 1500; easing: easeInOutSine; loop: true; dir: alternate"
-      ></a-entity>
-
-      <!-- Bottom label -->
-      <a-entity
-        id="ar-label"
-        position="0 -0.55 0.1"
-        text="value: Tap orbs to interact; align: center; color: #e8e8f0; width: 0.6; font: roboto"
-        animation="property: components.text.material.uniforms.opacity.value; from: 0.4; to: 1; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate"
-      ></a-entity>
-
-      <!-- Particle decorations -->
-      <a-sphere position="-0.15 0.6 0.05" radius="0.008"
-                material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 1; transparent: true; opacity: 0.6"
-                animation="property: position; to: -0.15 0.64 0.07; dur: 3500; easing: easeInOutSine; loop: true; dir: alternate">
+    <!-- PAGE 3: CONTACT (Direct Interaction Theme) -->
+    <a-entity mindar-image-target="targetIndex: 3" id="target-entity-3">
+      <a-plane position="0 0 0.001" width="1" height="1.414" material="color: #f1c40f; opacity: 0.08; transparent: true; side: double"></a-plane>
+      <a-entity position="0 0.5 0.1" text="value: CONNECT WITH US; align: center; width: 1.5; color: #ffffff"></a-entity>
+      <!-- Big Contact Spheres -->
+      <a-sphere class="clickable" position="0 0.1 0.2" radius="0.1" material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.5" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutSine; loop: true; dir: alternate" ar-click-handler="action: link; url: https://www.bookthatstudio.com">
+        <a-entity position="0 0 0.1" text="value: WEBSITE; align: center; width: 1; color: #fff"></a-entity>
       </a-sphere>
-      <a-sphere position="0.2 0.55 0.04" radius="0.006"
-                material="color: #fff; emissive: #fff; emissiveIntensity: 0.8; transparent: true; opacity: 0.5"
-                animation="property: position; to: 0.2 0.6 0.06; dur: 2200; easing: easeInOutSine; loop: true; dir: alternate">
+      <a-sphere class="clickable" position="-0.3 -0.3 0.15" radius="0.08" material="color: #2ecc71; emissive: #2ecc71; emissiveIntensity: 0.5" animation="property: position; to: -0.3 -0.25 0.15; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate" ar-click-handler="action: link; url: tel:+919220965377">
+        <a-entity position="0 0 0.09" text="value: CALL; align: center; width: 1; color: #fff"></a-entity>
       </a-sphere>
-      <a-sphere position="-0.3 -0.2 0.05" radius="0.01"
-                material="color: #3498db; emissive: #3498db; emissiveIntensity: 1; transparent: true; opacity: 0.6"
-                animation="property: position; to: -0.3 -0.15 0.07; dur: 2700; easing: easeInOutSine; loop: true; dir: alternate">
+      <a-sphere class="clickable" position="0.3 -0.3 0.15" radius="0.08" material="color: #e67e22; emissive: #e67e22; emissiveIntensity: 0.5" animation="property: position; to: 0.3 -0.25 0.15; dur: 2500; easing: easeInOutSine; loop: true; dir: alternate" ar-click-handler="action: link; url: mailto:hi@bookthatstudio.com">
+        <a-entity position="0 0 0.09" text="value: EMAIL; align: center; width: 1; color: #fff"></a-entity>
       </a-sphere>
-      <a-sphere position="0.15 -0.5 0.04" radius="0.007"
-                material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 1; transparent: true; opacity: 0.5"
-                animation="property: position; to: 0.15 -0.45 0.06; dur: 3200; easing: easeInOutSine; loop: true; dir: alternate">
-      </a-sphere>
-
+      <a-entity position="0 -0.55 0.1" text="value: Page 4: Let's Talk; align: center; color: #e8e8f0; width: 0.6; font: roboto"></a-entity>
     </a-entity>
 
   </a-scene>

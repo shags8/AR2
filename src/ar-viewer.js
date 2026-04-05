@@ -64,7 +64,6 @@ const dismissBtn = document.getElementById('dismiss-info');
 const hudStatusDot = document.getElementById('hud-status-dot');
 const hudStatusText = document.getElementById('hud-status-text');
 const arScene = document.getElementById('ar-scene');
-const targetEntity = document.getElementById('target-entity');
 
 let isTargetVisible = false;
 let notificationTimeout = null;
@@ -77,33 +76,45 @@ arScene.addEventListener('renderstart', () => {
   }, 1500);
 });
 
-// --- Target Events ---
-targetEntity.addEventListener('targetFound', () => {
-  isTargetVisible = true;
+// --- Multi-Target Handling ---
+const targetEntities = document.querySelectorAll('a-entity[mindar-image-target]');
+const pageTitles = [
+  "Page 1: Cover",
+  "Page 2: Our Services",
+  "Page 3: Property Showcase",
+  "Page 4: Contact Us"
+];
 
-  // Hide scanning overlay
-  scanningOverlay.classList.add('hidden');
+targetEntities.forEach((entity, index) => {
+  entity.addEventListener('targetFound', () => {
+    isTargetVisible = true;
+    
+    // Hide scanning overlay
+    scanningOverlay.classList.add('hidden');
 
-  // Update HUD
-  hudStatusDot.classList.remove('scanning');
-  hudStatusText.textContent = 'Tracking';
+    // Update HUD
+    hudStatusDot.classList.remove('scanning');
+    hudStatusText.textContent = `Tracking ${pageTitles[index]}`;
 
-  // Show notification
-  showNotification('✅ BookThatStudio brochure detected!');
-});
+    // Show notification
+    showNotification(`✅ Detected: ${pageTitles[index]}`);
+  });
 
-targetEntity.addEventListener('targetLost', () => {
-  isTargetVisible = false;
+  entity.addEventListener('targetLost', () => {
+    // Check if any OTHER target is still visible (to avoid flickering if possible)
+    // but typically MindAR handles one at a time unless maxTrack > 1
+    isTargetVisible = false;
 
-  // Show scanning overlay
-  scanningOverlay.classList.remove('hidden');
+    // Show scanning overlay
+    scanningOverlay.classList.remove('hidden');
 
-  // Update HUD
-  hudStatusDot.classList.add('scanning');
-  hudStatusText.textContent = 'Scanning...';
+    // Update HUD
+    hudStatusDot.classList.add('scanning');
+    hudStatusText.textContent = 'Scanning...';
 
-  // Hide info panel
-  toggleInfoPanel(false);
+    // Hide info panel
+    toggleInfoPanel(false);
+  });
 });
 
 // --- Info Panel ---
