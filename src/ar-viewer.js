@@ -89,7 +89,7 @@ targetEntity.addEventListener('targetFound', () => {
   hudStatusText.textContent = 'Tracking';
 
   // Show notification
-  showNotification('✅ Template detected!');
+  showNotification('✅ BookThatStudio brochure detected!');
 });
 
 targetEntity.addEventListener('targetLost', () => {
@@ -180,8 +180,8 @@ function triggerAnimation(el) {
   setTimeout(() => {
     el.setAttribute('animation', {
       property: 'rotation',
-      to: '60 360 0',
-      dur: 6000,
+      to: '75 360 0',
+      dur: 3000,
       easing: 'linear',
       loop: true
     });
@@ -214,4 +214,4 @@ setTimeout(() => {
   }
 }, 8000);
 
-console.log('🔮 ARBrochure Viewer initialized');
+console.log('📸 BookThatStudio AR Viewer initialized');
