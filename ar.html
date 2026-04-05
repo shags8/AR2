@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>AR Experience — BookThatStudio</title>
+  <meta name="description" content="Point your camera at the BookThatStudio brochure to see interactive 3D content." />
+
+  <!-- A-Frame must load before MindAR -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <link rel="stylesheet" href="src/styles/ar.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>📸</text></svg>" />
+</head>
+<body>
+
+  <!-- Loading Overlay -->
+  <div class="ar-loading-overlay" id="ar-loading">
+    <div class="ar-loading-spinner"></div>
+    <div class="ar-loading-text">Initializing AR Experience</div>
+    <div class="ar-loading-subtext">
+      Please allow camera access when prompted.<br />
+      Point your camera at the template to begin.
+    </div>
+  </div>
+
+  <!-- Scanning Overlay -->
+  <div class="ar-scanning-overlay" id="ar-scanning">
+    <div class="scan-reticle">
+      <div class="scan-reticle-corner"></div>
+      <div class="scan-reticle-corner"></div>
+      <div class="scan-reticle-corner"></div>
+      <div class="scan-reticle-corner"></div>
+      <div class="scan-line"></div>
+    </div>
+    <div class="scan-text">📷 Point camera at the template</div>
+  </div>
+
+  <!-- Back Button -->
+  <a href="index.html" class="ar-back-btn" id="ar-back" title="Back to Home">←</a>
+
+  <!-- HUD -->
+  <div class="ar-hud" id="ar-hud">
+    <div class="ar-hud-item">
+      <span class="ar-hud-dot scanning" id="hud-status-dot"></span>
+      <span id="hud-status-text">Scanning...</span>
+    </div>
+  </div>
+
+  <!-- Target Found Notification -->
+  <div class="ar-notification" id="ar-notification">
+    ✅ BookThatStudio brochure detected!
+  </div>
+
+  <!-- Info Panel -->
+  <div class="ar-info-panel" id="ar-info-panel">
+    <div class="ar-info-panel-handle"></div>
+    <h3>📸 BookThatStudio — AR Experience</h3>
+    <p>
+      Welcome to BookThatStudio's interactive experience! Your one-stop solution 
+      for all photography requirements — drone photography, real estate, and more.
+    </p>
+    <p>
+      Tap on the 3D elements to learn more about our services. 
+      Serviceable Pan India — contact us to book your shoot today!
+    </p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <a href="https://www.bookthatstudio.com" target="_blank" rel="noopener" class="info-link">
+        🌐 Visit Website
+      </a>
+      <button class="ar-info-dismiss" id="dismiss-info">
+        ✕ Close
+      </button>
+    </div>
+  </div>
+
+  <!-- A-Frame AR Scene -->
+  <a-scene
+    id="ar-scene"
+    mindar-image="imageTargetSrc: public/assets/targets/targets.mind; autoStart: true; uiLoading: no; uiError: no; uiScanning: no;"
+    color-space="sRGB"
+    renderer="colorManagement: true; physicallyCorrectLights: true; sortObjects: true; alpha: true"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    loading-screen="enabled: false"
+  >
+    <!-- Assets -->
+    <a-assets>
+      <img id="brochure-img" src="public/assets/templates/bts-realestate-brochure.png" crossorigin="anonymous" />
+    </a-assets>
+
+    <!-- Camera -->
+    <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+              raycaster="far: 10000; objects: .clickable">
+    </a-camera>
+
+    <!-- AR Content — anchored to target index 0 (portrait brochure ~0.71 aspect ratio) -->
+    <a-entity mindar-image-target="targetIndex: 0" id="target-entity">
+
+      <!-- Semi-transparent overlay on brochure (portrait: width=1, height=1.414) -->
+      <a-plane
+        id="ar-overlay"
+        position="0 0 0.001"
+        width="1"
+        height="1.414"
+        material="color: #e74c3c; opacity: 0.08; transparent: true; side: double"
+      ></a-plane>
+
+      <!-- Glowing border frame (portrait) -->
+      <a-entity id="ar-frame">
+        <a-plane position="0 0.707 0.002" width="1.02" height="0.008"
+                 material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5">
+        </a-plane>
+        <a-plane position="0 -0.707 0.002" width="1.02" height="0.008"
+                 material="color: #e74c3c; opacity: 0.8; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.5">
+        </a-plane>
+        <a-plane position="-0.506 0 0.002" width="0.008" height="1.42"
+                 material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4">
+        </a-plane>
+        <a-plane position="0.506 0 0.002" width="0.008" height="1.42"
+                 material="color: #e74c3c; opacity: 0.6; transparent: true; emissive: #e74c3c; emissiveIntensity: 0.4">
+        </a-plane>
+      </a-entity>
+
+      <!-- Central floating camera/drone icon sphere -->
+      <a-sphere
+        id="ar-orb"
+        class="clickable"
+        position="0 0.15 0.2"
+        radius="0.07"
+        material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 0.6; metalness: 0.8; roughness: 0.2; transparent: true; opacity: 0.9"
+        animation="property: position; to: 0 0.25 0.2; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate"
+        animation__rotate="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true"
+        animation__pulse="property: scale; to: 1.15 1.15 1.15; dur: 1500; easing: easeInOutSine; loop: true; dir: alternate"
+        ar-click-handler="action: info"
+      ></a-sphere>
+
+      <!-- Orbiting ring - drone propeller effect -->
+      <a-torus
+        id="ar-ring"
+        class="clickable"
+        position="0 0.15 0.2"
+        radius="0.12"
+        radius-tubular="0.004"
+        segments-radial="32"
+        segments-tubular="48"
+        material="color: #fff; emissive: #fff; emissiveIntensity: 0.4; transparent: true; opacity: 0.6"
+        rotation="75 0 0"
+        animation="property: rotation; to: 75 360 0; dur: 3000; easing: linear; loop: true"
+        ar-click-handler="action: animate"
+      ></a-torus>
+
+      <!-- Second ring -->
+      <a-torus
+        id="ar-ring-2"
+        position="0 0.15 0.2"
+        radius="0.15"
+        radius-tubular="0.002"
+        segments-radial="32"
+        segments-tubular="48"
+        material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 0.3; transparent: true; opacity: 0.4"
+        rotation="30 90 0"
+        animation="property: rotation; to: 30 450 0; dur: 8000; easing: linear; loop: true"
+      ></a-torus>
+
+      <!-- Service point: Website -->
+      <a-sphere
+        class="clickable"
+        position="-0.35 0.45 0.1"
+        radius="0.03"
+        material="color: #3498db; emissive: #3498db; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
+        animation="property: position; to: -0.35 0.5 0.1; dur: 2500; easing: easeInOutSine; loop: true; dir: alternate"
+        ar-click-handler="action: link; url: https://www.bookthatstudio.com"
+      ></a-sphere>
+
+      <!-- Service point: Call -->
+      <a-sphere
+        class="clickable"
+        position="0.35 0.4 0.08"
+        radius="0.025"
+        material="color: #2ecc71; emissive: #2ecc71; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
+        animation="property: position; to: 0.35 0.47 0.08; dur: 3000; easing: easeInOutSine; loop: true; dir: alternate"
+        ar-click-handler="action: link; url: tel:+919220965377"
+      ></a-sphere>
+
+      <!-- Service point: Email -->
+      <a-sphere
+        class="clickable"
+        position="0.3 -0.35 0.07"
+        radius="0.02"
+        material="color: #f39c12; emissive: #f39c12; emissiveIntensity: 0.8; transparent: true; opacity: 0.8"
+        animation="property: position; to: 0.3 -0.3 0.07; dur: 2800; easing: easeInOutSine; loop: true; dir: alternate"
+        ar-click-handler="action: link; url: mailto:hi@bookthatstudio.com"
+      ></a-sphere>
+
+      <!-- Main title text -->
+      <a-entity
+        id="ar-label-title"
+        position="0 0.55 0.1"
+        text="value: BookThatStudio; align: center; color: #ffffff; width: 1; font: roboto"
+        animation="property: components.text.material.uniforms.opacity.value; from: 0.6; to: 1; dur: 1500; easing: easeInOutSine; loop: true; dir: alternate"
+      ></a-entity>
+
+      <!-- Bottom label -->
+      <a-entity
+        id="ar-label"
+        position="0 -0.55 0.1"
+        text="value: Tap orbs to interact; align: center; color: #e8e8f0; width: 0.6; font: roboto"
+        animation="property: components.text.material.uniforms.opacity.value; from: 0.4; to: 1; dur: 2000; easing: easeInOutSine; loop: true; dir: alternate"
+      ></a-entity>
+
+      <!-- Particle decorations -->
+      <a-sphere position="-0.15 0.6 0.05" radius="0.008"
+                material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 1; transparent: true; opacity: 0.6"
+                animation="property: position; to: -0.15 0.64 0.07; dur: 3500; easing: easeInOutSine; loop: true; dir: alternate">
+      </a-sphere>
+      <a-sphere position="0.2 0.55 0.04" radius="0.006"
+                material="color: #fff; emissive: #fff; emissiveIntensity: 0.8; transparent: true; opacity: 0.5"
+                animation="property: position; to: 0.2 0.6 0.06; dur: 2200; easing: easeInOutSine; loop: true; dir: alternate">
+      </a-sphere>
+      <a-sphere position="-0.3 -0.2 0.05" radius="0.01"
+                material="color: #3498db; emissive: #3498db; emissiveIntensity: 1; transparent: true; opacity: 0.6"
+                animation="property: position; to: -0.3 -0.15 0.07; dur: 2700; easing: easeInOutSine; loop: true; dir: alternate">
+      </a-sphere>
+      <a-sphere position="0.15 -0.5 0.04" radius="0.007"
+                material="color: #e74c3c; emissive: #e74c3c; emissiveIntensity: 1; transparent: true; opacity: 0.5"
+                animation="property: position; to: 0.15 -0.45 0.06; dur: 3200; easing: easeInOutSine; loop: true; dir: alternate">
+      </a-sphere>
+
+    </a-entity>
+
+  </a-scene>
+
+  <script src="src/ar-viewer.js"></script>
+</body>
+</html>

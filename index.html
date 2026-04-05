@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookThatStudio — Interactive AR Brochure</title>
+  <meta name="description" content="Scan the BookThatStudio brochure to unlock an interactive AR experience. No app required — works in your mobile browser." />
+  <link rel="stylesheet" href="src/styles/main.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>📸</text></svg>" />
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="navbar-logo">
+        <span class="logo-icon">📸</span>
+        <span class="gradient-text">BookThatStudio</span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#template">Template</a></li>
+        <li><a href="#try-it" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">Try AR</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse"></span>
+          Web-Based AR Experience
+        </div>
+
+        <h1>
+          Your Brochure,<br />
+          <span class="gradient-text">Now in AR</span>
+        </h1>
+
+        <p class="hero-description">
+          Scan the BookThatStudio brochure to unlock an interactive AR experience. 
+          Explore services, contact details, and more — right from your phone.
+        </p>
+
+        <div class="hero-actions">
+          <a href="ar.html" class="btn btn-primary btn-lg" id="btn-start-ar">
+            <span class="btn-icon">🚀</span>
+            Start AR Experience
+          </a>
+          <a href="#how-it-works" class="btn btn-secondary btn-lg">
+            <span class="btn-icon">📖</span>
+            Learn More
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value gradient-text">0 App</div>
+            <div class="hero-stat-label">Installation Required</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value gradient-text">100%</div>
+            <div class="hero-stat-label">Browser-Based</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value gradient-text">Real-time</div>
+            <div class="hero-stat-label">3D Tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-visual-card">
+          <img src="public/assets/templates/bts-realestate-brochure.png" alt="BookThatStudio Company Profile Brochure" />
+          <div class="hero-visual-badge">
+            <div class="hero-visual-badge-icon">📸</div>
+            <div class="hero-visual-badge-text">
+              Point your camera here
+              <span>AR content will appear on this template</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-element" style="top: 10%; right: -20px;">
+          📷 Drone Photography
+        </div>
+        <div class="floating-element" style="bottom: 25%; left: -30px;">
+          🎯 Pan India Service
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">
+          Three Simple Steps to<br />
+          <span class="gradient-text">Unlock AR</span>
+        </h2>
+        <p class="section-subtitle">
+          No complicated setup. No app downloads. Just scan, point, and interact.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card glass-card reveal">
+          <div class="step-number">1</div>
+          <div class="step-icon">📱</div>
+          <h3>Scan QR Code</h3>
+          <p>Find the QR code on any printed template and scan it with your phone's camera.</p>
+        </div>
+
+        <div class="step-card glass-card reveal">
+          <div class="step-number">2</div>
+          <div class="step-icon">📷</div>
+          <h3>Point at Template</h3>
+          <p>Allow camera access and point your phone at the printed template design.</p>
+        </div>
+
+        <div class="step-card glass-card reveal">
+          <div class="step-number">3</div>
+          <div class="step-icon">🌟</div>
+          <h3>Interact in AR</h3>
+          <p>Watch 3D content come alive on top of the template. Tap to interact!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">
+          Powerful <span class="gradient-text">Capabilities</span>
+        </h2>
+        <p class="section-subtitle">
+          Built with cutting-edge web technologies for a seamless AR experience.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">🎯</div>
+          <div>
+            <h3>Image Recognition</h3>
+            <p>Advanced computer vision identifies templates in real-time through your camera, even at different angles and distances.</p>
+          </div>
+        </div>
+
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">🧊</div>
+          <div>
+            <h3>3D Visualization</h3>
+            <p>Rich 3D objects render directly on top of recognized templates with smooth animations and realistic lighting.</p>
+          </div>
+        </div>
+
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">👆</div>
+          <div>
+            <h3>Tap Interactions</h3>
+            <p>Tap on AR elements to trigger animations, open links, or display additional information panels.</p>
+          </div>
+        </div>
+
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">🌐</div>
+          <div>
+            <h3>No App Required</h3>
+            <p>Runs entirely in the browser. Works on any modern smartphone — iPhone or Android — without installing anything.</p>
+          </div>
+        </div>
+
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">⚡</div>
+          <div>
+            <h3>Instant Loading</h3>
+            <p>Optimized for fast loading over mobile connections. Start the AR experience in seconds, not minutes.</p>
+          </div>
+        </div>
+
+        <div class="feature-card glass-card reveal">
+          <div class="feature-icon">🔄</div>
+          <div>
+            <h3>Dynamic Content</h3>
+            <p>Update AR experiences without reprinting. Change 3D models, links, and interactions at any time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEMPLATE PREVIEW ============ -->
+  <section class="template-preview" id="template">
+    <div class="container">
+      <div class="template-image-wrapper reveal">
+        <img src="public/assets/templates/bts-realestate-brochure.png" alt="BookThatStudio Company Profile" />
+      </div>
+
+      <div class="template-info reveal">
+        <div class="section-label">AR Template</div>
+        <h2>
+          <span class="gradient-text">BookThatStudio</span><br />
+          Company Profile
+        </h2>
+        <p>
+          This brochure is AR-enabled! Print it out or display on another screen, 
+          then scan it with the AR viewer to explore interactive 3D content.
+        </p>
+
+        <ul class="template-details">
+          <li><span class="check">✓</span> High-contrast design for reliable detection</li>
+          <li><span class="check">✓</span> Unique visual patterns optimized for tracking</li>
+          <li><span class="check">✓</span> Works at various angles and distances</li>
+          <li><span class="check">✓</span> Pre-compiled recognition data included</li>
+        </ul>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="BTS Real Estate Brochure 2026.pdf" download class="btn btn-secondary">
+            <span class="btn-icon">📥</span>
+            Download Brochure
+          </a>
+          <a href="ar.html" class="btn btn-primary">
+            <span class="btn-icon">📸</span>
+            Try AR Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QR CODE ============ -->
+  <section class="qr-section" id="try-it">
+    <div class="container">
+      <div class="qr-card glass-card reveal">
+        <div class="section-label" style="justify-content: center;">Quick Access</div>
+        <h2>
+          Scan to <span class="gradient-text">Experience AR</span>
+        </h2>
+        <p>
+          Scan this QR code with your phone to open the AR experience directly in your browser.
+        </p>
+
+        <div class="qr-code-container" id="qr-code-container">
+          <!-- QR code will be rendered here by JS -->
+        </div>
+
+        <p class="qr-instructions">
+          📱 Opens the AR viewer in your mobile browser.<br />
+          Make sure to have the printed template ready!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Built with
+        <a href="https://hiukim.github.io/mind-ar-js-doc/" target="_blank" rel="noopener">MindAR.js</a> &
+        <a href="https://aframe.io/" target="_blank" rel="noopener">A-Frame</a>
+        — Bridging physical and digital worlds.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="src/landing.js"></script>
+</body>
+</html>
